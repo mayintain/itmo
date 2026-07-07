@@ -2,7 +2,12 @@
 
 input_addr:      .word  0x80
 output_addr:     .word  0x84
-const_1:         .word  0x1
+
+zero:            .word  0
+one:             .word  1
+bit_mask:        .word  1
+loop_count:      .word  15
+
 left:            .word  0
 right:           .word  0
 
@@ -10,34 +15,31 @@ right:           .word  0
     .org 0x100
 
 _start:
-    @p input_addr a! @
+    init_input
 
-    dup
-    !p left
-    !p right
-
-    lit 15 >r
+    @p loop_count
+    >r
 
 loop:
     @p right
-    @p const_1
+    @p bit_mask
     and
 
     @p left
     -if left_zero
-    lit 1
+
+    @p one
     compare_bits ;
 
 left_zero:
-    lit 0
+    @p zero
 
 compare_bits:
     xor
     if bits_equal
 
-    lit 0
-    @p output_addr a! !
-    halt
+    @p zero
+    write_result
 
 bits_equal:
     @p left
@@ -50,6 +52,21 @@ bits_equal:
 
     next loop
 
-    lit 1
-    @p output_addr a! !
+    @p one
+    write_result
+
+init_input:
+    @p input_addr
+    a!
+    @
+
+    dup
+    !p left
+    !p right
+    ;
+
+write_result:
+    @p output_addr
+    a!
+    !
     halt
