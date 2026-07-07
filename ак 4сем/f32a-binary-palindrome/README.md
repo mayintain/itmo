@@ -8,7 +8,7 @@
 
 ## файлы
 
-- `assm.s` — исходный код на F32a
+- `f32a.s` — исходный код на F32a
 - `tests/test_1.yaml` — тест для `5 -> 0`
 - `tests/test_2.yaml` — тест для `15 -> 0`
 - `tests/test_3.yaml` — тест для `4026531855 -> 1`
@@ -21,4 +21,4 @@ docker run --rm -it \
   -v "$PWD":/work \
   -w /work \
   ryukzak/wrench:latest \
-  wrench assm.s --isa f32a -c tests/test_1.yaml
+  wrench f32a.s --isa f32a -c tests/test_1.yaml
