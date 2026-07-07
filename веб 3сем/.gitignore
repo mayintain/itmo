@@ -1,18 +1,13 @@
-# macOS
 .DS_Store
 
-# IDE
 .idea/
 *.iml
 
-# Java build
 *.class
 out/
 target/
 
-# Logs
 *.log
 httpd/logs/
 
-# System
 Thumbs.db
